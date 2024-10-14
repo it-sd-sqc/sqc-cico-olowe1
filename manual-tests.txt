@@ -52,7 +52,7 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 * Should display "Checked IN" after step 2.
 * Should display "Checked OUT" after step 4.
 
-# Module 3: Match between system and the real world
+## Module 3: Match between system and the real world
 
 ## Test steps
 1. Build and run CiCo.
