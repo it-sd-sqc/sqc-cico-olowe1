@@ -39,28 +39,37 @@ public class Main {
 
     @Override
     public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
-        throws BadLocationException
-    {
-      if (fb.getDocument() != null) {
-        super.insertString(fb, offset, stringToAdd, attr);
-      }
-      else {
-        Toolkit.getDefaultToolkit().beep();
-      }
+            throws BadLocationException {
+        if (fb.getDocument() != null) {
+            if (stringToAdd != null && stringToAdd.matches("\\d*") && (fb.getDocument().getLength() + stringToAdd.length() <= MAX_LENGTH)) {
+                super.insertString(fb, offset, stringToAdd, attr);
+            } else {
+                Toolkit.getDefaultToolkit().beep(); // Alert for invalid input
+            }
+        } else {
+            Toolkit.getDefaultToolkit().beep(); // Beep if the document is null
+        }
     }
 
     @Override
     public void replace(FilterBypass fb, int offset, int lengthToDelete, String stringToAdd, AttributeSet attr)
-        throws BadLocationException
-    {
-      if (fb.getDocument() != null) {
-        super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
-      }
-      else {
-        Toolkit.getDefaultToolkit().beep();
-      }
+            throws BadLocationException {
+        if (fb.getDocument() != null) {
+            if (stringToAdd != null && stringToAdd.matches("\\d*")) {
+                int currentLength = fb.getDocument().getLength();
+                int newLength = currentLength - lengthToDelete + stringToAdd.length();
+
+                if (newLength <= MAX_LENGTH) {
+                    super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
+                } else {
+                    Toolkit.getDefaultToolkit().beep(); // Alert for exceeding max length
+                }
+            }
+        } else {
+            Toolkit.getDefaultToolkit().beep(); // Beep if the document is null
+        }
     }
-  }
+}
 
   // Lookup the card information after button press ///////////////////////////
   public static class Update implements ActionListener {
@@ -201,8 +210,10 @@ public class Main {
 
   // Return to the main panel /////////////////////////////////////////////////
   private static void doneProcessing() {
-    timeout.cancel();
-    timeout = null;
+    if (timeout != null) {
+      timeout.cancel();
+      timeout = null;
+    }
     fieldNumber.setText("");
     ((CardLayout)deck.getLayout()).show(deck, CARD_MAIN);
     fieldNumber.grabFocus();
@@ -265,6 +276,21 @@ public class Main {
     updateButton.addActionListener(new Update());
     updateButton.setForeground(Color.green);
     panelMain.add(updateButton);
+    
+    // Add bypass button to skip timeout
+    JButton bypassButton = new JButton("Next");
+    bypassButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+    bypassButton.setForeground(Color.green);
+    bypassButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // Stop the timeout and transition to the next state
+            doneProcessing();
+            // You may also transition directly to the status panel if needed
+            // ((CardLayout)deck.getLayout()).show(deck, CARD_STATE);
+        }
+    });
+    
+    panelMain.add(bypassButton);  // Add the bypass button below the update button
 
     panelMain.add(Box.createVerticalGlue());
 
