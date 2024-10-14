@@ -335,7 +335,7 @@ public class Main {
     labelMeta.setMaximumSize(new Dimension(640, 32));
     frame.getContentPane().add(labelMeta, BorderLayout.PAGE_END);
 
-    // Connect to DB //////////////////////////////////////////////////////////
+    // Connect to DB ///////////////////////////////////////////////////////////
     try {
       //noinspection SpellCheckingInspection
       db = DriverManager.getConnection("jdbc:sqlite:cico.db");
