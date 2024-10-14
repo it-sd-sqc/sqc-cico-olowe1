@@ -61,4 +61,11 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 ## Expected results
 * Should display "Developer" for the user name.
 
+## Module 6- Changing the Colors
 
+## Test steps
+1. Build and run Cico
+
+
+## Expected results
+* The colors and scheme should be changed to monochromatic and subdued.

@@ -224,12 +224,17 @@ public class Main {
     db = null;
     timer = new java.util.Timer("CiCo timeout timer");
     Handler handler = new Handler();
+    Color background = new Color(61, 34, 146);
+    Color textBoxtext = new Color(12, 12, 12);
+    Color text = new Color(1, 1, 1);
+    Color textBox = new Color(255, 255, 255);
 
     // Create our GUI.
     JFrame frame = new JFrame();
     frame.setMinimumSize(new Dimension(320, 240));
     frame.setPreferredSize(new Dimension(640, 480));
     frame.setMaximumSize(new Dimension(640, 480));
+
 
     // Collect each "card" panel in a deck.
     deck = new JPanel(new CardLayout());
@@ -241,13 +246,13 @@ public class Main {
     panelMain.setMinimumSize(new Dimension(320, 240));
     panelMain.setPreferredSize(new Dimension(640, 480));
     panelMain.setMaximumSize(new Dimension(640, 480));
-    panelMain.setBackground(Color.black);
+    panelMain.setBackground(background);
 
     panelMain.add(Box.createVerticalGlue());
     JLabel labelDirective = new JLabel("Scan card", JLabel.LEADING);
     labelDirective.setFont(fontMain);
     labelDirective.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    labelDirective.setForeground(Color.cyan);
+    labelDirective.setForeground(text);
     panelMain.add(labelDirective);
 
     fieldNumber = new JTextField();
@@ -256,14 +261,14 @@ public class Main {
     fieldNumber.setPreferredSize(new Dimension(200, 32));
     fieldNumber.setMaximumSize(new Dimension(200, 32));
     fieldNumber.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    fieldNumber.setBackground(Color.green);
-    fieldNumber.setForeground(Color.magenta);
+    fieldNumber.setBackground(textBox);
+    fieldNumber.setForeground(textBoxtext);
     panelMain.add(fieldNumber);
 
     JButton updateButton = new JButton("Update");
     updateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
     updateButton.addActionListener(new Update());
-    updateButton.setForeground(Color.green);
+    updateButton.setForeground(text);
     panelMain.add(updateButton);
 
     panelMain.add(Box.createVerticalGlue());
@@ -274,19 +279,19 @@ public class Main {
     panelStatus.setMinimumSize(new Dimension(320, 240));
     panelStatus.setPreferredSize(new Dimension(640, 480));
     panelStatus.setMaximumSize(new Dimension(640, 480));
-    panelStatus.setBackground(Color.blue);
+    panelStatus.setBackground(background);
 
     panelStatus.add(Box.createVerticalGlue());
     labelUser = new JLabel("Registrant", JLabel.LEADING);
     labelUser.setFont(fontMain);
     labelUser.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    labelUser.setForeground(Color.yellow);
+    labelUser.setForeground(text);
     panelStatus.add(labelUser);
 
     labelState = new JLabel("updated", JLabel.LEADING);
     labelState.setFont(fontMain);
     labelState.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    labelState.setForeground(Color.magenta);
+    labelState.setForeground(text);
     panelStatus.add(labelState);
 
     panelStatus.add(Box.createVerticalGlue());
@@ -297,19 +302,19 @@ public class Main {
     panelError.setMinimumSize(new Dimension(320, 240));
     panelError.setPreferredSize(new Dimension(640, 480));
     panelError.setMaximumSize(new Dimension(640, 480));
-    panelError.setBackground(Color.red);
+    panelError.setBackground(background);
 
     panelError.add(Box.createVerticalGlue());
     labelReason = new JLabel("", JLabel.LEADING);
     labelReason.setFont(fontMain);
     labelReason.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    labelReason.setForeground(Color.yellow);
+    labelReason.setForeground(text);
     panelError.add(labelReason);
 
     buttonAcknowledge = new JButton("OK");
     buttonAcknowledge.addActionListener(handler);
     buttonAcknowledge.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    buttonAcknowledge.setForeground(Color.red);
+    buttonAcknowledge.setForeground(text);
     panelError.add(buttonAcknowledge);
     panelError.add(Box.createVerticalGlue());
 
